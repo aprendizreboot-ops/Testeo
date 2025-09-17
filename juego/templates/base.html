@@ -1,27 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Stitch Game{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>{% block title %}TourExpress{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+    <script src="{% static 'js/admin_custom.js' %}"></script>
 </head>
 <body>
+<header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'juego:home' %}">🎮 StitchGame</a>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:lugar_list' %}">Lugares</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:mision_list' %}">Misiones</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:territorio_list' %}">Territorios</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:regalo_list' %}">Regalos</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:amistad_list' %}">Amigos</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:ranking_territorios' %}">Ranking</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'juego:logout' %}">Salir</a></li>
-            </ul>
+            <a class="navbar-brand" href="{% url 'juego:home' %}">TourExpress</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    {% if not request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:register' %}">Registro</a></li>
+                    {% elif request.user.rol == "jugador" %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:profile' %}">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:mis_juegos' %}">Mis Juegos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:logout' %}">Cerrar sesión</a></li>
+                    {% elif request.user.rol == "admin" or request.user.is_superuser or request.user.is_staff %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:admin_dashboard' %}">Dashboard Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:user_list' %}">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'juego:logout' %}">Cerrar sesión</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
-    </main>
+</header>
+
+<main class="container mt-4">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 TourExpress</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Admin{% endblock %}
+{% block content %}
+<h2 class="mb-4">Bienvenido, {{ request.user.username }}</h2>
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Usuarios Totales</h5>
+                <p class="card-text fs-2">{{ total_usuarios }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Jugadores</h5>
+                <p class="card-text fs-2">{{ total_jugadores }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5 class="card-title">Administradores</h5>
+                <p class="card-text fs-2">{{ total_admins }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <a href="{% url 'juego:user_list' %}" class="btn btn-outline-light">Ver todos los usuarios</a>
+</div>
+{% endblock %}

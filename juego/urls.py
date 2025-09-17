@@ -9,8 +9,16 @@ urlpatterns = [
     # =========================
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
+    path("register/", views.register, name="register"),  # <-- añadido
     path("", views.home, name="home"),
     path("admin-dashboard/", views.admin_dashboard, name="admin_dashboard"),
+
+    path("confirmar-codigo/", views.confirmar_codigo, name="confirmar_codigo"),
+    
+
+    path("solicitar-codigo/", views.solicitar_codigo_admin, name="solicitar_codigo_admin"),
+    path("ingresar-codigo/", views.ingresar_codigo_admin, name="ingresar_codigo_admin"),
+
 
     # =========================
     # Usuarios (solo admin)

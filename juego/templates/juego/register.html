@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="min-height: 80vh;">
+    <div class="row justify-content-center align-items-center" style="min-height: 100%;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4 p-4">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-5 fw-bold" style="letter-spacing: 0.5px;">Crear cuenta</h3>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show py-2" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        <!-- Usuario -->
+                        <div class="mb-4">
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {% if form.username.help_text %}
+                                <div class="form-text text-muted">{{ form.username.help_text }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Correo -->
+                        <div class="mb-4">
+                            {{ form.correo.label_tag }}
+                            {{ form.correo }}
+                        </div>
+
+                        <!-- Rol oculto -->
+                        <input type="hidden" name="rol" value="jugador">
+
+                        <!-- Contraseña -->
+                        <div class="mb-4">
+                            {{ form.password1.label_tag }}
+                            {{ form.password1 }}
+                            {% if form.password1.help_text %}
+                                <div class="form-text text-muted">{{ form.password1.help_text }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Confirmar contraseña -->
+                        <div class="mb-4">
+                            {{ form.password2.label_tag }}
+                            {{ form.password2 }}
+                        </div>
+
+                        <!-- Código de confirmación -->
+                        <div class="mb-4">
+                            <label for="admin_code" class="form-label">Código de confirmación</label>
+                            <input type="text" name="admin_code" id="admin_code" class="form-control form-control-lg rounded-3" placeholder="Ingresa el código recibido por correo">
+                            <div class="form-text text-muted">Este código ayuda a verificar que no eres un bot.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 btn-lg rounded-3 fw-semibold py-2">Crear Cuenta</button>
+                    </form>
+
+                    <p class="mt-5 text-center text-muted" style="letter-spacing: 0.3px;">
+                        ¿Ya tienes cuenta? <a href="{% url 'juego:login' %}" class="text-decoration-none fw-bold">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

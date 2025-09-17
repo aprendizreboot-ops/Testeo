@@ -1,0 +1,6 @@
+<h2>Ingresar código de administrador</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Validar código</button>
+</form>

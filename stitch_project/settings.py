@@ -42,14 +42,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",  # debe ir antes de AuthenticationMiddleware
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = 'stitch_project.urls'
 
@@ -143,4 +144,13 @@ AUTH_USER_MODEL = "juego.Usuario"
 LOGIN_URL = '/login/'      # aquí mandamos al login real
 LOGIN_REDIRECT_URL = '/'   # a dónde ir después de iniciar sesión
 LOGOUT_REDIRECT_URL = '/'  # a dónde ir después de cerrar sesión
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tucorreo@gmail.com'
+EMAIL_HOST_PASSWORD = 'tu_contraseña_de_app'  # usa contraseña de app de Gmail
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 

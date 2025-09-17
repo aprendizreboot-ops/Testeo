@@ -12,9 +12,14 @@ class Usuario(AbstractUser):
         choices=[("admin", "Administrador"), ("jugador", "Jugador")],
         default="jugador"
     )
+    
+    # NUEVOS CAMPOS
+    admin_token = models.CharField(max_length=100, blank=True, null=True)
+    llave_seguridad = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.username
+
 
 
 # ------------------------

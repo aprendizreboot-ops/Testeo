@@ -1,17 +1,44 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
+
 {% block content %}
-<h2>Iniciar sesión</h2>
-<form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username">Usuario</label>
-        <input type="text" name="username" class="form-control" required>
+<div class="card mx-auto mt-5" style="max-width: 400px; background-color: #1e1e1e; color: white;">
+    <div class="card-body">
+        <h3 class="card-title text-center mb-3">Iniciar Sesión</h3>
+
+        <!-- Mensajes de Django -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Usuario o Correo</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <button class="btn btn-primary w-100">Entrar</button>
+        </form>
+
+        <p class="mt-3 text-center">¿No tienes cuenta? <a href="{% url 'juego:register' %}">Regístrate</a></p>
+
+        <!-- Tarjeta dorada para llave de seguridad de admin -->
+        {% if user.is_authenticated and user.rol == "admin" and user.llave_seguridad %}
+            <div class="card mt-4 p-3" style="background: linear-gradient(90deg, #FFD700, #FFC107); color: black; font-weight: bold; text-align: center;">
+                🏆 Tu llave de seguridad: {{ user.llave_seguridad }} 🏆
+            </div>
+        {% endif %}
     </div>
-    <div class="mb-3">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-</form>
+</div>
 {% endblock %}
+
+
