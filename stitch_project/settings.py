@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-@u9#_se7xdk#13uh=xtp!it2vau9zg-=_c+=1_)apz3&=p-)ps
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tu-app.herokuapp.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",  # debe ir antes de AuthenticationMiddleware
     "django.middleware.common.CommonMiddleware",
@@ -154,3 +157,7 @@ EMAIL_HOST_PASSWORD = 'tu_contraseña_de_app'  # usa contraseña de app de Gmail
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+import django_heroku
+django_heroku.settings(locals())
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
