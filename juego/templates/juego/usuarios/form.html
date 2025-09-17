@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Formulario{% endblock %}
+{% block content %}
+<h2>Formulario</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Campos -->
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}

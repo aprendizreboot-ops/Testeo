@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Artículo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Detalle del Artículo</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ articulo.nombre }}</li>
+        <li class="list-group-item"><strong>Descripción:</strong> {{ articulo.descripcion }}</li>
+        <li class="list-group-item"><strong>Precio:</strong> S/. {{ articulo.precio }}</li>
+    </ul>
+
+    <div class="mt-3">
+        <a href="{% url 'juego:articulo_update' articulo.pk %}" class="btn btn-warning">✏ Editar</a>
+        <a href="{% url 'juego:articulo_delete' articulo.pk %}" class="btn btn-danger">🗑 Eliminar</a>
+        <a href="{% url 'juego:articulo_list' %}" class="btn btn-secondary">⬅ Volver</a>
+    </div>
+</div>
+{% endblock %}

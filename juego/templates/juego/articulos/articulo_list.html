@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Artículos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Artículos en la Tienda</h2>
+
+    <a href="{% url 'juego:articulo_create' %}" class="btn btn-primary mb-3">➕ Crear Artículo</a>
+
+    {% if articulos %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for articulo in articulos %}
+                <tr>
+                    <td>{{ articulo.nombre }}</td>
+                    <td>{{ articulo.descripcion }}</td>
+                    <td>S/. {{ articulo.precio }}</td>
+                    <td>
+                        <a href="{% url 'juego:articulo_detail' articulo.pk %}" class="btn btn-info btn-sm">👁 Ver</a>
+                        <a href="{% url 'juego:articulo_update' articulo.pk %}" class="btn btn-warning btn-sm">✏ Editar</a>
+                        <a href="{% url 'juego:articulo_delete' articulo.pk %}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="alert alert-info">No hay artículos registrados.</p>
+    {% endif %}
+</div>
+{% endblock %}

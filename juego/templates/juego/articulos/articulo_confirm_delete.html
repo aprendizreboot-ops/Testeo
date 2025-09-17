@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Eliminar Artículo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-danger">⚠ Confirmar Eliminación</h2>
+
+    <p>¿Estás seguro de que deseas eliminar el artículo <strong>{{ articulo.nombre }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">🗑 Sí, eliminar</button>
+        <a href="{% url 'juego:articulo_list' %}" class="btn btn-secondary">⬅ Cancelar</a>
+    </form>
+</div>
+{% endblock %}
