@@ -20,8 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('juego.urls')),  # Todas las rutas de la app juego
+    path("admin/", admin.site.urls),
+    path("", include("juego.urls")),  # incluye todas las rutas de la app
 ]
 
 if settings.DEBUG:

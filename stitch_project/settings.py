@@ -139,3 +139,8 @@ MEDIA_URL = '/media/'  # URL pública para acceder a los archivos
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta donde se guardan los archivos
 
 AUTH_USER_MODEL = "juego.Usuario"
+
+LOGIN_URL = '/login/'      # aquí mandamos al login real
+LOGIN_REDIRECT_URL = '/'   # a dónde ir después de iniciar sesión
+LOGOUT_REDIRECT_URL = '/'  # a dónde ir después de cerrar sesión
+
