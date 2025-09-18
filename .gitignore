@@ -1,1 +1,4 @@
-*.pyc,__pycache__/,db.sqlite3,/media/,*.log,myenv/,*.py[cod],*.sqlite3,*.pot,*.mo,*.swp,*.swo,*.DS_Store,.vscode/, .idea/ 
+*.pyc 
+__pycache__/ 
+db.sqlite3 
+/venv/ 
